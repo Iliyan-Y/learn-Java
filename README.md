@@ -1,1 +1,1 @@
-Small java projects for learning Java
+Small projects for learning Java
