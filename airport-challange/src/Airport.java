@@ -1,6 +1,14 @@
+import java.util.ArrayList;
+
 public class Airport {
-    public static void main(String[] args) {
-       Plane plane = new Plane("F1");
-        System.out.println(plane.name);
+    ArrayList<Plane> hangar;
+
+    public Airport() {
+        this.hangar  = new ArrayList<Plane>();
     }
+
+    public void landPlane(Plane plane) {
+        hangar.add(plane);
+    }
+
 }
