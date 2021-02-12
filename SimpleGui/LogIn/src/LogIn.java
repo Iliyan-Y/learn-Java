@@ -1,9 +1,9 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 public class LogIn implements ActionListener {
-    private JPanel panel;
     private JTextField userText;
     private JPasswordField passwordText;
     private JLabel message;
@@ -13,7 +13,7 @@ public class LogIn implements ActionListener {
         frame.setSize(500,500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        panel = new JPanel();
+        JPanel panel = new JPanel();
         frame.add(panel);
         panel.setLayout(null);
 
@@ -36,7 +36,7 @@ public class LogIn implements ActionListener {
         button.addActionListener(this);
         panel.add(button);
 
-        message = new JLabel("");
+        message = new JLabel();
         message.setBounds(10,110,300, 25);
         panel.add(message);
 
@@ -45,7 +45,18 @@ public class LogIn implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println(userText.getText());
+        String acc = userText.getText();
+        char[] pass = passwordText.getPassword();
+
+        JPasswordField defaultPass = new JPasswordField("admin");
+        char[] expected = defaultPass.getPassword();
+
+
+        if (acc.equals("admin") && Arrays.equals(pass, expected)) {
+            message.setText("Successful log in !");
+        } else {
+            message.setText("Please try again later");
+        }
     }
 
     public static void main(String[] args) {
