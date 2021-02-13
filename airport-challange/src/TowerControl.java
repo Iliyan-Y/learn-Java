@@ -4,11 +4,13 @@ public class TowerControl {
 
 
     public static void main(String[] args) {
+        System.out.println(plane1.flying);
         ap1.landPlane(plane1);
         ap1.landPlane(plane1);
 
         System.out.println(ap1.hangar.size());
         System.out.println(ap1.hangar.get(0).name);
+        System.out.println(plane1.flying);
         System.out.println(ap1.displayAllPlanes());
     }
 }

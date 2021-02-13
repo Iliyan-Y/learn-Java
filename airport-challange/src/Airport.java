@@ -6,6 +6,7 @@ public class Airport {
 
     public void landPlane(Plane plane) {
         hangar.add(plane);
+        plane.flying = false;
     }
 
     public String displayAllPlanes() {
