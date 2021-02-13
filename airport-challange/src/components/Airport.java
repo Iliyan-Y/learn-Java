@@ -1,8 +1,10 @@
+package components;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Airport {
-    List<Plane> hangar = new ArrayList<>();
+    public List<Plane> hangar = new ArrayList<>();
 
     public void landPlane(Plane plane) {
         hangar.add(plane);

@@ -1,3 +1,6 @@
+import components.Airport;
+import components.Plane;
+
 public class TowerControl {
     static Plane plane1 = new Plane("F1");
     static Plane plane2 = new Plane("F2");

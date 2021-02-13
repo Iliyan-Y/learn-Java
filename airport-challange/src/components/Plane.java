@@ -1,6 +1,8 @@
+package components;
+
 public class Plane {
-    String name;
-    boolean flying = true;
+    public String name;
+    public boolean flying = true;
 
     public Plane(String name) {
         this.name = name;

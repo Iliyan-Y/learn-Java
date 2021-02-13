@@ -1,10 +1,15 @@
-public class Tests {
+package test;
+import components.Airport;
+import components.Plane;
+
+public class AirportTest {
     static Plane plane1 = new Plane("F1");
     static Airport ap1 = new Airport();
 
-    public static void main(String[] args) {
+    public static int test() {
+        int counter = 0;
         do {
-            int counter = 0;
+
             try {
                 counter++;
                 System.out.println("Testing: Planes can land at the airport");
@@ -31,7 +36,8 @@ public class Tests {
                 break;
             }
 
-            System.out.println(counter + " tests passed successfully");
         } while (false);
+
+        return counter;
     }
 }
