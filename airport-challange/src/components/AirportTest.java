@@ -22,14 +22,13 @@ class AirportTest {
   @Test
   @DisplayName("Planes cant land when airport is full")
   void landPlaneWhenApFull() {
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < airport.capacity; i++) {
       airport.landPlane(plane);
     }
     Throwable exceptionThatWasThrown = assertThrows(IllegalArgumentException.class,
         () -> {
           airport.landPlane(plane);
         });
-
     assertEquals("airport is full", exceptionThatWasThrown.getMessage());
   }
 
@@ -50,5 +49,14 @@ class AirportTest {
     expectedList.add("test Plane");
     expectedList.add("test Plane 2");
     assertEquals(expectedList.toString(), airport.showAllPlanesName());
+  }
+
+  @Test
+  void changeCapacity(){
+    int newCapacity = 10;
+    int firstCapacity = airport.capacity;
+    airport.changeCapacity(newCapacity);
+    assertEquals(newCapacity, airport.capacity);
+    assertNotEquals(firstCapacity, airport.capacity);
   }
 }

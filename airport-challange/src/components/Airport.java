@@ -5,9 +5,10 @@ import java.util.List;
 
 public class Airport {
   public List<Plane> hangar = new ArrayList<>();
+  public int capacity = 3;
 
   public void landPlane(Plane plane) {
-    if (hangar.size() == 3) {
+    if (hangar.size() == capacity) {
       throw new IllegalArgumentException("airport is full");
     }
     hangar.add(plane);
@@ -21,6 +22,9 @@ public class Airport {
     System.out.println("Plane " + plane.name + " has took off successfully");
   }
 
+  public void changeCapacity(int newCapacity) {
+    capacity = newCapacity;
+  }
 
   public String showAllPlanesName() {
     List<String> planes = new ArrayList<>();
