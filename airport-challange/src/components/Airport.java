@@ -21,7 +21,6 @@ public class Airport {
     public String showAllPlanesName() {
         List<String> planes = new ArrayList<>();
         hangar.forEach(plane -> planes.add(plane.name));
-
         return planes.toString();
     }
 
