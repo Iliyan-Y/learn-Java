@@ -3,6 +3,7 @@ package components;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,9 +44,21 @@ class AirportTest {
     assertEquals(newCapacity, airport.hangar.size());
   }
 
+
+  @Test
+  @DisplayName("prevent Plane To take off in stormy weather")
+  void preventTakeOffInStormyWeather() {
+    airport.landPlane(plane);
+    Throwable exceptionThatWasThrown = assertThrows(IllegalArgumentException.class,
+        () -> {
+          airport.takeOffPlane(plane);
+        });
+    assertEquals("Bad weather, airport is closed",
+        exceptionThatWasThrown.getMessage());
+  }
+
   @Test
   void takeOffPlane() {
-
     airport.landPlane(plane);
     airport.takeOffPlane(plane);
     assertTrue(plane.flying);
@@ -63,7 +76,7 @@ class AirportTest {
   }
 
   @Test
-  void changeCapacity(){
+  void changeCapacity() {
     int newCapacity = 10;
     int firstCapacity = airport.capacity;
     airport.changeCapacity(newCapacity);
