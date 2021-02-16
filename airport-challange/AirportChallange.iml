@@ -55,5 +55,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="org.mockito:mockito-core:Latest" level="project" />
   </component>
 </module>
