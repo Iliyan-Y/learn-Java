@@ -33,6 +33,17 @@ class AirportTest {
   }
 
   @Test
+  @DisplayName("Airport capacity can be overwritten")
+  void airportCapCanBeChanged() {
+    int newCapacity = 5;
+    airport.capacity = newCapacity;
+    for (int i = 0; i < airport.capacity; i++) {
+      airport.landPlane(plane);
+    }
+    assertEquals(newCapacity, airport.hangar.size());
+  }
+
+  @Test
   void takeOffPlane() {
 
     airport.landPlane(plane);
