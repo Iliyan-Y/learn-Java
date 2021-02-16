@@ -1,13 +1,13 @@
 package components;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 public class Airport {
   public List<Plane> hangar = new ArrayList<>();
   public int capacity = 3;
+  private boolean[] weather = {true, false};
 
   public void landPlane(Plane plane) {
     if (hangar.size() == capacity) {
@@ -19,7 +19,7 @@ public class Airport {
   }
 
   public void takeOffPlane(Plane plane) {
-    if (stormyWeather()) {
+    if (checkWeather()) {
       throw new IllegalArgumentException("Bad weather, airport is closed");
     }
     hangar.remove(plane);
@@ -37,11 +37,13 @@ public class Airport {
     return planes.toString();
   }
 
-  private boolean stormyWeather() {
-    boolean[] weather = {true, false, false, true, true, false, true, false};
+  int getRandomNumber() {
     Random rand = new Random();
-    int randomWeather = rand.nextInt(weather.length);
-    return weather[randomWeather];
+    return rand.nextInt(weather.length);
+  }
+
+  private boolean checkWeather() {
+    return weather[getRandomNumber()];
   }
 
 }

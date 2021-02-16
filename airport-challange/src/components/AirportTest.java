@@ -2,14 +2,12 @@ package components;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-
 
 class AirportTest {
 
@@ -21,13 +19,6 @@ class AirportTest {
     airport.landPlane(plane);
     assertEquals(false, plane.flying);
     assertEquals(true, airport.hangar.contains(plane));
-  }
-
-  @Test
-   void mocking() {
-    Random mockedRand = mock(Random.class);
-    when(mockedRand.nextInt()).thenReturn(1);
-    System.out.println(mockedRand.nextInt());
   }
 
   @Test
@@ -58,11 +49,14 @@ class AirportTest {
   @Test
   @DisplayName("prevent Plane To take off in stormy weather")
   void preventTakeOffInStormyWeather() {
+    // mock the airport class
+    Airport airportSpy = Mockito.spy(airport);
+    Mockito.doReturn(0).when(airportSpy).getRandomNumber();
 
-    airport.landPlane(plane);
+    airportSpy.landPlane(plane);
     Throwable exceptionThatWasThrown = assertThrows(IllegalArgumentException.class,
         () -> {
-          airport.takeOffPlane(plane);
+          airportSpy.takeOffPlane(plane);
         });
     assertEquals("Bad weather, airport is closed",
         exceptionThatWasThrown.getMessage());
