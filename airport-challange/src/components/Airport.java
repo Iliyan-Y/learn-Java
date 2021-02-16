@@ -13,6 +13,9 @@ public class Airport {
     if (hangar.size() == capacity) {
       throw new IllegalArgumentException("airport is full");
     }
+    if (checkWeather()) {
+      throw new IllegalArgumentException("Bad weather, airport is closed");
+    }
     hangar.add(plane);
     plane.flying = false;
     System.out.println("Plane " + plane.name + " has landed successfully");
