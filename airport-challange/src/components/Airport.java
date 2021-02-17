@@ -25,6 +25,9 @@ public class Airport {
     if (checkWeather()) {
       throw new IllegalArgumentException("Bad weather, airport is closed");
     }
+    if (!hangar.contains(plane)) {
+      throw new IllegalArgumentException("This plain isn't at this airport");
+    }
     hangar.remove(plane);
     plane.flying = true;
     System.out.println("Plane " + plane.name + " has took off successfully");

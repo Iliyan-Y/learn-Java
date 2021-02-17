@@ -107,4 +107,20 @@ class AirportTest {
     assertEquals(newCapacity, airport.capacity);
     assertNotEquals(firstCapacity, airport.capacity);
   }
+
+  @Test
+  void planesCanNotTakeOffIfNotAtAirport() {
+    Airport newAirport = Mockito.spy(new Airport());
+    Plane testPlane = new Plane("TestPlane2");
+    doReturn(goodWeather).when(newAirport).getRandomNumber();
+
+    Throwable exceptionThatWasThrown = assertThrows(IllegalArgumentException.class,
+        () -> {
+          newAirport.takeOffPlane(testPlane);
+        });
+    assertEquals("This plain isn't at this airport",
+        exceptionThatWasThrown.getMessage());
+  }
+
+
 }
