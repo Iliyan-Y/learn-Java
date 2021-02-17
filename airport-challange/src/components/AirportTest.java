@@ -30,7 +30,7 @@ class AirportTest {
   void landPlaneWhenApFull() {
     doReturn(goodWeather).when(airportSpy).getRandomNumber();
     for (int i = 0; i < airportSpy.capacity; i++) {
-      airportSpy.landPlane(plane);
+      airportSpy.landPlane(new Plane("random"));
     }
     Throwable exceptionThatWasThrown = assertThrows(IllegalArgumentException.class,
         () -> {
@@ -46,7 +46,7 @@ class AirportTest {
     int newCapacity = 5;
     airportSpy.capacity = newCapacity;
     for (int i = 0; i < airportSpy.capacity; i++) {
-      airportSpy.landPlane(plane);
+      airportSpy.landPlane(new Plane("Tests"));
     }
     assertEquals(newCapacity, airportSpy.hangar.size());
   }
@@ -122,5 +122,36 @@ class AirportTest {
         exceptionThatWasThrown.getMessage());
   }
 
+  @Test
+  void planesCanNotTakeOffFromDifferentLocation() {
+    Airport newAirport = Mockito.spy(new Airport());
+    Airport newMexicoAp = Mockito.spy(new Airport());
+    Plane testPlane = new Plane("TestPlane2");
+    doReturn(goodWeather).when(newAirport).getRandomNumber();
+    doReturn(goodWeather).when(newMexicoAp).getRandomNumber();
+    newAirport.landPlane(testPlane);
+
+    Throwable exceptionThatWasThrown = assertThrows(IllegalArgumentException.class,
+        () -> {
+          newMexicoAp.takeOffPlane(testPlane);
+        });
+    assertEquals("This plain isn't at this airport",
+        exceptionThatWasThrown.getMessage());
+  }
+
+  @Test
+  void planesCanLandOnlyIfTheyFly() {
+    Airport newAirport = Mockito.spy(new Airport());
+    Plane testPlane = new Plane("TestPlane2");
+    doReturn(goodWeather).when(newAirport).getRandomNumber();
+    newAirport.landPlane(testPlane);
+
+    Throwable exceptionThatWasThrown = assertThrows(IllegalArgumentException.class,
+        () -> {
+          newAirport.landPlane(testPlane);
+        });
+    assertEquals("This plain isn't flying",
+        exceptionThatWasThrown.getMessage());
+  }
 
 }
